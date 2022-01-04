@@ -135,4 +135,5 @@ class TagCacheRepository implements \TripUp\Cache\Contracts\TagCache
         $storedTags = $this->serializer->deserialize(Cache::get($this->tagsKey));
         return in_array($tag, $storedTags);
     }
+
 }

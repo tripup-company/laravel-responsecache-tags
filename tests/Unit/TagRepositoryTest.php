@@ -13,9 +13,8 @@ class TagRepositoryTest extends TestCase
      * @var TagCache
      */
     protected $repository;
-    /**
-     * @test
-     */
+
+
     protected function setUp(): void
     {
         parent::setUp();
