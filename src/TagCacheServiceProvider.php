@@ -3,12 +3,16 @@ namespace TripUp\Cache;
 
 use Illuminate\Cache\Events\KeyWritten;
 use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use TripUp\Cache\Contracts\RequestTagResolver;
 use TripUp\Cache\Contracts\ResponseTagResolver;
 use TripUp\Cache\Contracts\Serializer;
 use TripUp\Cache\Contracts\TagCache;
+use TripUp\Cache\Controllers\WebhookController;
 use TripUp\Cache\Listeners\CacheWriteListener;
+use TripUp\Cache\Middlewares\WebhookAccess;
 use TripUp\Cache\Serializers\DefaultSerializer;
 
 class TagCacheServiceProvider extends PackageServiceProvider
@@ -28,6 +32,10 @@ class TagCacheServiceProvider extends PackageServiceProvider
         });
 
         $this->app->bind(Serializer::class, DefaultSerializer::class);
+        Route::aliasMiddleware("webhook-access", WebhookAccess::class);
+        Route::post(config("tagcache.webhook"),[WebhookController::class,'resetCache'])
+            ->middleware(["webhook-access"])
+            ->name('reset-cache.webhook');
 
     }
 

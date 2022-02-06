@@ -14,6 +14,6 @@ class DefaultSerializer implements Serializer
 
     public function deserialize(string $data)
     {
-        return json_decode($data);
+        return json_decode($data,1);
     }
 }

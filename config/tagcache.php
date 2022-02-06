@@ -3,8 +3,12 @@ return [
     /*
     * Determine if the response cache middleware should be enabled.
     */
-    "enabled" => env("RESPONSE_CACHE_TAG_ENAVLE", true),
-
+    "enabled" => env("RESPONSE_CACHE_TAG_ENABLE", true),
+    "webhook" => env("RESPONSE_CACHE_WEBHOOK", "/inventory/reset-cache"),
+    "webhook_secret" => env("RESPONSE_CACHE_WEBHOOK_SECRET", "secret"),
+    "webhook_jobs" => [
+        \TripUp\Cache\Jobs\WebhookResetCacheJob::class,
+    ],
     /*
      *  The given class will determinate if a request has tags.
      *  The default class resolve tags from json response collection with objects field id.
@@ -13,7 +17,13 @@ return [
      *  ResponseTagResolver interface.
      */
     "tag_response_resolver" => \TripUp\Cache\Resolvers\DefaultResponseTagResolver::class,
-    "tag_request_resolver"=>\TripUp\Cache\Resolvers\DefaultRequestTagResolver::class,
+    "tag_response_resolver_strategies" => [
+        //... Here must be the RequestResolverStrategyContract implementations
+    ],
+    "tag_request_resolver" => \TripUp\Cache\Resolvers\DefaultRequestTagResolver::class,
+    "tag_request_resolver_strategies" => [
+        // ... Here must be the ResponseResolverStrategyContract implementations
+    ],
 
     /*
     *  The given class implement TagCache interface if a request has tags.
