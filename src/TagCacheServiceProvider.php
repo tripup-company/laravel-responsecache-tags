@@ -18,9 +18,11 @@ class TagCacheServiceProvider extends PackageServiceProvider
         \Event::listen(KeyWritten::class, CacheWriteListener::class);
 
         $this->app->singleton(ResponseTagResolver::class, function (Container $app) {
-            return $app->make(config('tagcache.tag_resolver'));
+            return $app->make(config('tagcache.tag_response_resolver'));
         });
-
+        $this->app->singleton(RequestTagResolver::class, function (Container $app) {
+            return $app->make(config('tagcache.tag_request_resolver'));
+        });
         $this->app->singleton(TagCache::class, function (Container $app) {
             return $app->make(config('tagcache.tag_store'));
         });

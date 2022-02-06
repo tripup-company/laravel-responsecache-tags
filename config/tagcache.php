@@ -12,7 +12,8 @@ return [
      *  You can provide your own class given that it implements the
      *  ResponseTagResolver interface.
      */
-    "tag_resolver" => \TripUp\Cache\Resolvers\DefaultResponseTagResolver::class,
+    "tag_response_resolver" => \TripUp\Cache\Resolvers\DefaultResponseTagResolver::class,
+    "tag_request_resolver"=>\TripUp\Cache\Resolvers\DefaultRequestTagResolver::class,
 
     /*
     *  The given class implement TagCache interface if a request has tags.

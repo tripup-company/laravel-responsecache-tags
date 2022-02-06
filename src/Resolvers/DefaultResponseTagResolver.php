@@ -3,7 +3,6 @@
 namespace TripUp\Cache\Resolvers;
 
 use Illuminate\Http\Response;
-use TripUp\Cache\Contracts\ResponseTagResolver;
 
 class DefaultResponseTagResolver implements ResponseTagResolver
 {
