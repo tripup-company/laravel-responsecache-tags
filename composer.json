@@ -2,7 +2,7 @@
     "name": "tripup-company/laravel-responsecache-tags",
     "description": "Custom taged cache implementation",
     "type": "library",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "require": {
         "laravel/framework": "*",
         "spatie/laravel-responsecache": "^6.6",

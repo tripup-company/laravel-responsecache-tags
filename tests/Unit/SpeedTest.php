@@ -48,6 +48,7 @@ class SpeedTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->markTestSkipped();
         $this->repository = $this->app->make(TagCache::class);
     }
 
