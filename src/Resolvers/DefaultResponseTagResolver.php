@@ -29,7 +29,7 @@ class DefaultResponseTagResolver implements ResponseTagResolver
                     Response::HTTP_INTERNAL_SERVER_ERROR,
                     "Wrong tag resolver instance");
                 if ($resolverInstance->hasTags($data)) {
-                    $tags = $tags + $resolverInstance->getTags($data);
+                    $tags = array_merge($tags, $resolverInstance->getTags($data));
                 }
             }
         } catch (\Exception $e) {
